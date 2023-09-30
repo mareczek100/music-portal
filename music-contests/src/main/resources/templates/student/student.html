@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>STUDENT main page</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+            crossorigin="anonymous"></script>
+</head>
+<body class="p-3 mb-2 bg-dark-subtle text-emphasis-dark">
+<form class="row g-3" action="#" th:action="@{/authentication/logout}" method="POST">
+    <div class="d-flex flex-row-reverse">
+        <button class="btn btn-info" type="submit">Wyloguj!</button>
+    </div>
+</form>
+<h1 class="text-center">Witaj uczniu!</h1><br>
+<h2 class="text-center">Wybierz jedną z dostępnych funkcjonalności.</h2><br>
+<div class="row justify-content-evenly">
+    <div class="card" style="width: 18rem;">
+        <a class="btn" th:href="@{/student/competition/instrument}" role="button">
+            <img th:src="@{/images/competition/competition_search.jpg}" class="card-img-top" alt="Wyszukaj konkursy">
+            <div class="card-body">
+                <h5 class="card-title">Wyszukiwarka konkursów</h5>
+                <p class="card-text">Sprawdź aktualnie dostępne konkursy muzyczne.</p>
+            </div>
+        </a>
+    </div>
+    <div class="card" style="width: 18rem;">
+        <a class="btn" th:href="@{/student/result}" role="button">
+            <img th:src="@{/images/competition/competition_check.jpg}" class="card-img-top" alt="Sprawdź wyniki">
+            <div class="card-body">
+                <h5 class="card-title">Wyszukiwarka wyników</h5>
+                <p class="card-text">Sprawdź wyniki zakończonych konkursów muzycznych.</p>
+            </div>
+        </a>
+    </div>
+</div>
+</body>
+</html>

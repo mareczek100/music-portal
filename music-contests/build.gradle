@@ -1,0 +1,127 @@
+plugins {
+	id 'java'
+	id 'jacoco'
+	id 'org.springframework.boot' version "${springBootVersion}"
+	id 'org.openapi.generator' version "${openapiGeneratorVersion}"
+	id 'io.spring.dependency-management' version "${springBootDependencyManagementVersion}"
+}
+
+group = 'mareczek100'
+version = '1.0.0'
+
+java {
+	sourceCompatibility = "17"
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+	//spring
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation "org.thymeleaf.extras:thymeleaf-extras-java8time:$thymeleafVersion"
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
+
+	//db
+	implementation 'org.flywaydb:flyway-core'
+	runtimeOnly 'org.postgresql:postgresql'
+
+	//api
+	implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:$springdocOpenapiVersion"
+	implementation "javax.annotation:javax.annotation-api:$javaxAnnotationApiVersion"
+	implementation "org.openapitools:jackson-databind-nullable:$jacksonDatabindNullableVersion"
+	implementation "com.google.code.findbugs:jsr305:$findBugsJsr305Version"
+	implementation "io.swagger:swagger-annotations:$swaggerAnnotationVersion"
+
+	//annotation
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	annotationProcessor "org.projectlombok:lombok-mapstruct-binding:$lombokMapstructVersion"
+	implementation "org.mapstruct:mapstruct:$mapstructVersion"
+	annotationProcessor "org.mapstruct:mapstruct-processor:$mapstructVersion"
+
+	//test
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation 'org.springframework.boot:spring-boot-testcontainers'
+	testImplementation 'org.testcontainers:junit-jupiter'
+	testImplementation 'org.testcontainers:postgresql'
+	testCompileOnly 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
+	testImplementation "org.testcontainers:postgresql:${testcontainersVersion}"
+	testImplementation "io.rest-assured:rest-assured:${restAssuredVersion}"
+	testImplementation "org.slf4j:slf4j-api:${wiremockSlf4jVersion}"
+	testImplementation "com.github.tomakehurst:wiremock-jre8-standalone:${wiremockVersion}"
+
+}
+
+openApiGenerate {
+	generatorName = "java"
+	library = "webclient"
+
+	inputSpec = "$rootDir/src/main/resources/contracts/instrumentstorage-1.0.0.json".toString()
+	outputDir = "$buildDir/generated-sources/instrument-storage".toString()
+	apiPackage = "mareczek100.infrastructure.api"
+	modelPackage = "mareczek100.infrastructure.model"
+
+	configOptions = [
+			serializableModel: "true",
+			dateLibrary: "java8",
+			serializationLibrary: "jackson"
+	]
+}
+
+sourceSets {
+	main {
+		java.srcDirs += "$buildDir/generated-sources/instrument-storage/src/main/java".toString()
+	}
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+bootJar {
+	archiveFileName = "music_contests.${archiveExtension.get()}"
+}
+
+jar {
+	enabled = false
+}
+
+test {
+	testLogging {
+		events "passed", "skipped", "failed"
+	}
+	finalizedBy jacocoTestReport
+}
+
+jacocoTestReport{
+	dependsOn test
+	afterEvaluate {
+		classDirectories.setFrom(files(classDirectories.files.collect {
+			fileTree(dir: it, exclude: [
+					"mareczek100/musiccontests/MusicContestsApplication.class",
+					"mareczek100/musiccontests/infrastructure/**",
+					"mareczek100/infrastructure/**"
+			])
+		}))
+	}
+}
+
+compileJava.options.encoding = 'UTF-8'
+compileJava.dependsOn tasks.openApiGenerate

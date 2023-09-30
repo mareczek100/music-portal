@@ -1,0 +1,410 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Instrument Storage API",
+    "contact": {
+      "name": "Marek Jankowski",
+      "email": "mareczek100@wp.pl"
+    },
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8082/instrument-storage",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/api/instrument/add": {
+      "post": {
+        "tags": [
+          "instrument-rest-controller"
+        ],
+        "summary": "Add new instrument to Instrument storage.",
+        "operationId": "addInstrumentToExistingInstrumentList",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InstrumentDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InstrumentDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/instrument/update": {
+      "patch": {
+        "tags": [
+          "instrument-rest-controller"
+        ],
+        "summary": "Update instrument by put old and new-updated name. Use polish diacritical marks if necessary.",
+        "operationId": "updateExistingInstrumentByName",
+        "parameters": [
+          {
+            "name": "oldInstrumentName",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "newInstrumentName",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InstrumentDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/error": {
+      "get": {
+        "tags": [
+          "error-rest-controller"
+        ],
+        "summary": "Error message in bad endpoint case.",
+        "operationId": "errorEndpoint",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/instrument": {
+      "get": {
+        "tags": [
+          "instrument-rest-controller"
+        ],
+        "summary": "Find list of available instruments.",
+        "operationId": "allInstrumentList",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InstrumentsDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/instrument/{instrumentName}/name": {
+      "get": {
+        "tags": [
+          "instrument-rest-controller"
+        ],
+        "summary": "Find instrument by instrument name. To list all instruments use allInstrumentList() method.",
+        "operationId": "findInstrumentByName",
+        "parameters": [
+          {
+            "name": "instrumentName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InstrumentDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/instrument/{instrumentId}/id": {
+      "get": {
+        "tags": [
+          "instrument-rest-controller"
+        ],
+        "summary": "Find instrument by instrument id number. Id is an integer between 1 and size of all instrument list.",
+        "operationId": "findInstrumentById",
+        "parameters": [
+          {
+            "name": "instrumentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InstrumentDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/instrument/{instrumentCategory}/category": {
+      "get": {
+        "tags": [
+          "instrument-rest-controller"
+        ],
+        "summary": "List all instruments by category: \"strunowe\", \"dęte\" (with polish diacritical marks) or \"perkusyjne\".",
+        "operationId": "findInstrumentsByCategory",
+        "parameters": [
+          {
+            "name": "instrumentCategory",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InstrumentsDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/instrument/category": {
+      "get": {
+        "tags": [
+          "instrument-category-rest-controller"
+        ],
+        "summary": "Find list of available instrument category.",
+        "operationId": "allInstrumentCategoryList",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InstrumentCategoriesDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/instrument/category/{instrumentCategoryName}/category": {
+      "get": {
+        "tags": [
+          "instrument-category-rest-controller"
+        ],
+        "summary": "Find instrument category by category name (with polish diacritical marks).",
+        "operationId": "findInstrumentCategoryByCategoryName",
+        "parameters": [
+          {
+            "name": "instrumentCategoryName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InstrumentCategoryDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/instrument/category/{instrumentCategoryId}/id": {
+      "get": {
+        "tags": [
+          "instrument-category-rest-controller"
+        ],
+        "summary": "Find instrument category by name. Id is an integer between 1 and 3 - just main categories.",
+        "operationId": "findInstrumentCategoryById",
+        "parameters": [
+          {
+            "name": "instrumentCategoryId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InstrumentCategoryDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "tags": [
+          "error-rest-controller"
+        ],
+        "summary": "Error message in bad endpoint case.",
+        "operationId": "error",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/instrument/delete": {
+      "delete": {
+        "tags": [
+          "instrument-rest-controller"
+        ],
+        "summary": "Delete instrument from our storage by instrument name.",
+        "operationId": "deleteInstrumentByName",
+        "parameters": [
+          {
+            "name": "instrumentName",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "InstrumentCategoryDto": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "enum": [
+              "strunowe",
+              "dęte",
+              "perkusyjne"
+            ]
+          }
+        }
+      },
+      "InstrumentDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "primarySchoolDegree": {
+            "type": "boolean"
+          },
+          "secondarySchoolDegree": {
+            "type": "boolean"
+          },
+          "category": {
+            "$ref": "#/components/schemas/InstrumentCategoryDto"
+          }
+        }
+      },
+      "InstrumentsDto": {
+        "type": "object",
+        "properties": {
+          "instrumentDtoList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InstrumentDto"
+            }
+          }
+        }
+      },
+      "InstrumentCategoriesDto": {
+        "type": "object",
+        "properties": {
+          "instrumentCategoryDtoList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InstrumentCategoryDto"
+            }
+          }
+        }
+      }
+    }
+  }
+}

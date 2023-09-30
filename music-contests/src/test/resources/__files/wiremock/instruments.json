@@ -1,0 +1,348 @@
+{
+  "instrumentDtoList": [
+    {
+      "name": "strunowe",
+      "primarySchoolDegree": true,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "strunowe"
+      }
+    },
+    {
+      "name": "skrzypce",
+      "primarySchoolDegree": true,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "strunowe"
+      }
+    },
+    {
+      "name": "altówka",
+      "primarySchoolDegree": false,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "strunowe"
+      }
+    },
+    {
+      "name": "wiolonczela",
+      "primarySchoolDegree": true,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "strunowe"
+      }
+    },
+    {
+      "name": "kontrabas",
+      "primarySchoolDegree": true,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "strunowe"
+      }
+    },
+    {
+      "name": "harfa",
+      "primarySchoolDegree": false,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "strunowe"
+      }
+    },
+    {
+      "name": "gitara",
+      "primarySchoolDegree": true,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "strunowe"
+      }
+    },
+    {
+      "name": "lutnia",
+      "primarySchoolDegree": false,
+      "secondarySchoolDegree": false,
+      "category": {
+        "category": "strunowe"
+      }
+    },
+    {
+      "name": "klawesyn",
+      "primarySchoolDegree": false,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "strunowe"
+      }
+    },
+    {
+      "name": "fortepian",
+      "primarySchoolDegree": true,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "strunowe"
+      }
+    },
+    {
+      "name": "cymbały",
+      "primarySchoolDegree": false,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "strunowe"
+      }
+    },
+    {
+      "name": "dęte",
+      "primarySchoolDegree": true,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "dęte"
+      }
+    },
+    {
+      "name": "flet",
+      "primarySchoolDegree": true,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "dęte"
+      }
+    },
+    {
+      "name": "obój",
+      "primarySchoolDegree": false,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "dęte"
+      }
+    },
+    {
+      "name": "rożek_angielski",
+      "primarySchoolDegree": false,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "dęte"
+      }
+    },
+    {
+      "name": "klarnet",
+      "primarySchoolDegree": true,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "dęte"
+      }
+    },
+    {
+      "name": "fagot",
+      "primarySchoolDegree": false,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "dęte"
+      }
+    },
+    {
+      "name": "kontrafagot",
+      "primarySchoolDegree": false,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "dęte"
+      }
+    },
+    {
+      "name": "saksofon",
+      "primarySchoolDegree": true,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "dęte"
+      }
+    },
+    {
+      "name": "waltornia",
+      "primarySchoolDegree": false,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "dęte"
+      }
+    },
+    {
+      "name": "trąbka",
+      "primarySchoolDegree": true,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "dęte"
+      }
+    },
+    {
+      "name": "puzon",
+      "primarySchoolDegree": false,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "dęte"
+      }
+    },
+    {
+      "name": "tuba",
+      "primarySchoolDegree": false,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "dęte"
+      }
+    },
+    {
+      "name": "organy",
+      "primarySchoolDegree": false,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "dęte"
+      }
+    },
+    {
+      "name": "akordeon",
+      "primarySchoolDegree": true,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "dęte"
+      }
+    },
+    {
+      "name": "perkusyjne",
+      "primarySchoolDegree": true,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "perkusyjne"
+      }
+    },
+    {
+      "name": "perkusja",
+      "primarySchoolDegree": true,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "perkusyjne"
+      }
+    },
+    {
+      "name": "kotły",
+      "primarySchoolDegree": false,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "perkusyjne"
+      }
+    },
+    {
+      "name": "bębny",
+      "primarySchoolDegree": false,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "perkusyjne"
+      }
+    },
+    {
+      "name": "gong",
+      "primarySchoolDegree": false,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "perkusyjne"
+      }
+    },
+    {
+      "name": "talerze",
+      "primarySchoolDegree": false,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "perkusyjne"
+      }
+    },
+    {
+      "name": "ksylofon",
+      "primarySchoolDegree": false,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "perkusyjne"
+      }
+    },
+    {
+      "name": "marimba",
+      "primarySchoolDegree": false,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "perkusyjne"
+      }
+    },
+    {
+      "name": "dzwonki",
+      "primarySchoolDegree": false,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "perkusyjne"
+      }
+    },
+    {
+      "name": "czelesta",
+      "primarySchoolDegree": false,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "perkusyjne"
+      }
+    },
+    {
+      "name": "wibrafon",
+      "primarySchoolDegree": false,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "perkusyjne"
+      }
+    },
+    {
+      "name": "dzwony_rurowe",
+      "primarySchoolDegree": false,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "perkusyjne"
+      }
+    },
+    {
+      "name": "trójkąt",
+      "primarySchoolDegree": false,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "perkusyjne"
+      }
+    },
+    {
+      "name": "kastaniety",
+      "primarySchoolDegree": false,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "perkusyjne"
+      }
+    },
+    {
+      "name": "pudełka_akustyczne",
+      "primarySchoolDegree": false,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "perkusyjne"
+      }
+    },
+    {
+      "name": "klekotka",
+      "primarySchoolDegree": false,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "perkusyjne"
+      }
+    },
+    {
+      "name": "terkotka",
+      "primarySchoolDegree": false,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "perkusyjne"
+      }
+    },
+    {
+      "name": "grzechotka",
+      "primarySchoolDegree": false,
+      "secondarySchoolDegree": true,
+      "category": {
+        "category": "perkusyjne"
+      }
+    }
+  ]
+}

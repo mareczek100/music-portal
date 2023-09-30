@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Create STUDENT account</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+            crossorigin="anonymous"></script>
+</head>
+<body class="p-3 mb-2 bg-dark-subtle text-emphasis-dark">
+<h1 class="text-center">Stwórz konto ucznia.</h1><br>
+<h4 class="text-center text-info">To już ostatni krok, podaj wymagane informacje poniżej.</h4><br><br>
+<form class="row g-3 was-validated" action="#" th:object="${studentDto}"
+      th:action="@{/authentication/account/student}" method="POST">
+    <input type="hidden" th:name="name" th:value="${portalUser.name}" class="form-control" required>
+    <input type="hidden" th:name="surname" th:value="${portalUser.surname}" class="form-control" required>
+    <input type="hidden" th:name="email" th:value="${portalUser.email}" class="form-control" required>
+    <input type="hidden" th:name="pesel" th:value="${portalUser.pesel}" class="form-control" required>
+    <input type="hidden" th:name="studentPassword" th:value="${portalUser.password}" class="form-control" required>
+    <input type="hidden" th:name="musicSchoolId"
+           th:value="${musicSchoolDto.musicSchoolId}" class="form-control" required>
+    <input type="hidden" th:name="musicSchoolName"
+           th:value="${musicSchoolDto.musicSchoolName}" class="form-control" required>
+    <input type="hidden" th:name="musicSchoolPatron"
+           th:value="${musicSchoolDto.musicSchoolPatron}" class="form-control" required>
+    <input type="hidden" th:name="musicSchoolPrimaryDegree"
+           th:value="${musicSchoolDto.musicSchoolPrimaryDegree}" class="form-control" required>
+    <input type="hidden" th:name="musicSchoolSecondaryDegree"
+           th:value="${musicSchoolDto.musicSchoolSecondaryDegree}" class="form-control" required>
+    <input type="hidden" th:name="addressCountry"
+           th:value="${musicSchoolDto.addressCountry}" class="form-control" required>
+    <input type="hidden" th:name="addressCity"
+           th:value="${musicSchoolDto.addressCity}" class="form-control" required>
+    <input type="hidden" th:name="addressPostalCode"
+           th:value="${musicSchoolDto.addressPostalCode}" class="form-control" required>
+    <input type="hidden" th:name="addressStreet"
+           th:value="${musicSchoolDto.addressStreet}" class="form-control" required>
+    <input type="hidden" th:name="addressBuildingNumber"
+           th:value="${musicSchoolDto.addressBuildingNumber}" class="form-control" required>
+    <input type="hidden" th:name="addressAdditionalInfo"
+           th:value="${musicSchoolDto.addressAdditionalInfo}" class="form-control" required>
+    <div class="row">
+        <div class="col-md-4">
+            <label for="validationStudentMainInstrument" class="form-label">Instrument główny</label>
+            <select th:name="mainInstrument" class="form-select" id="validationStudentMainInstrument" required>
+                <option hidden selected disabled value=""></option>
+                <span th:each="instrument : ${instrumentDTOs}">
+                <option th:value="${instrument.name}" th:text="${instrument.name}"></option>
+                </span>
+            </select>
+            <div class="valid-feedback">Ok!</div>
+            <div class="invalid-feedback">Wybierz instrument, na którym aktualnie uczysz się grać.</div>
+        </div>
+        <div class="col-md-4">
+            <label for="validationStudentSecondInstrument" class="form-label">Instrument dodatkowy (opcjonalny)</label>
+            <select th:name="secondInstrument" class="form-select" id="validationStudentSecondInstrument" required>
+                <option hidden selected disabled value=""></option>
+                <option class="text-bg-warning p-3" th:value="NONE">Bez drugiego instrumentu</option>
+                <span th:each="instrument : ${instrumentDTOs}">
+                <option th:value="${instrument.name}" th:text="${instrument.name}"></option>
+                </span>
+            </select>
+            <div class="valid-feedback">Ok!</div>
+            <div class="invalid-feedback">Wybierz instrument, którego uczyłeś się kiedyś lub uczysz się aktualnie dodatkowo.</div>
+        </div>
+        <div class="col-md-4">
+            <label for="validationStudentClass" class="form-label">Klasa</label>
+            <select th:name="classYear" class="form-select" id="validationStudentClass" required>
+                <option hidden selected disabled value=""></option>
+                <span th:each="class : ${classLevels}">
+                <option th:value="${class}" th:text="${class.getClassLevel()}"></option>
+                </span>
+            </select>
+            <div class="valid-feedback">Ok!</div>
+            <div class="invalid-feedback">Wybierz, do której chodzisz klasy.</div>
+        </div>
+    </div><p>
+    <div class="row">
+        <div class="col-md-4">
+            <label for="validationEducationDuration" class="form-label">Cykl trwania nauki</label>
+            <select th:name="educationDuration" class="form-select" id="validationEducationDuration" required>
+                <option hidden selected disabled value=""></option>
+                <span th:each="program : ${educationPrograms}">
+                <option th:value="${program}" th:text="${program.getYearProgram()}"></option>
+                </span>
+            </select>
+            <div class="valid-feedback">Ok!</div>
+            <div class="invalid-feedback">Wybierz cykl 4 lub 6-letni.</div>
+        </div>
+        <div class="col-md-4">
+            <label for="validationMusicSchoolDegree" class="form-label">Stopień szkoły</label>
+            <select th:name="musicSchoolDegree" class="form-select" id="validationMusicSchoolDegree" required>
+                <option hidden selected disabled value=""></option>
+                <span th:each="degree : ${degrees}">
+                <option th:value="${degree}" th:text="${degree.getDegree()}"></option>
+                </span>
+            </select>
+            <div class="valid-feedback">Ok!</div>
+            <div class="invalid-feedback">Wybierz stopień szkoły, w której się uczysz.</div>
+        </div>
+        <div class="col-md-4">
+            <label for="validationTeacherInstrument" class="form-label">Nauczyciel</label>
+            <select th:name="teacherEmail" class="form-select" id="validationTeacherInstrument" required>
+                <option hidden selected disabled value=""></option>
+                <span th:each="teacher : ${teacherDTOs}">
+                <option th:value="${teacher.email}" th:text="${teacher.name} + ' ' + ${teacher.surname}"></option>
+                </span>
+            </select>
+            <div class="valid-feedback">Ok!</div>
+            <div class="invalid-feedback">Wybierz swojego nauczyciela z listy.</div>
+        </div>
+    </div><p>
+    <div class="text-center">
+        <button class="btn btn-success btn-lg" type="submit">Załóż konto!</button>
+    </div>
+</form>
+</body>
+</html>

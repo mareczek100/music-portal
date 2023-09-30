@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>HEADMASTER COMPETITION CREATE page</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+            crossorigin="anonymous"></script>
+</head>
+<body class="p-3 mb-2 bg-dark-subtle text-emphasis-dark">
+<form class="row g-3" action="#" th:action="@{/authentication/logout}" method="POST">
+    <div class="d-flex flex-row-reverse">
+        <button class="btn btn-info" type="submit">Wyloguj!</button>
+    </div>
+</form>
+<h1 class="text-center">Tutaj stworzysz nowy konkurs.</h1><br>
+<h4 class="text-center">Konkurs muzyczny:</h4>
+<form class="row g-2 was-validated" action="#" th:object="${competitionDto}" th:action="@{/headmaster/competition/create}" method="POST">
+    <div class="col-md-4 offset-md-4">
+    <div class="container text-center">
+        <div>
+            <label for="validationCompetitionName" class="form-label">Nazwa konkursu</label>
+            <input type="text" th:field="*{competitionName}" class="form-control" id="validationCompetitionName" required>
+            <div class="valid-feedback">Ok!</div>
+            <div class="invalid-feedback">Podaj pełną nazwę konkursu, który organizujesz.</div>
+        </div><p>
+        <div>
+            <label for="validationCompetitionInstrument" class="form-label">Instrument</label>
+            <select th:name="competitionInstrument" class="form-select" id="validationCompetitionInstrument" required>
+                <option class="text-muted" selected disabled value="">Instrument konkursu</option>
+                <span th:each="instrument : ${instrumentDTOs}">
+                <option th:value="${instrument.name}" th:text="${instrument.name}"></option>
+                </span>
+            </select>
+            <div class="valid-feedback">Ok!</div>
+            <div class="invalid-feedback">
+                Wybierz instrument, którego dotyczy konkurs.
+            </div>
+        </div><p>
+        <div>
+            <label for="validationCompetitionOnline" class="form-label">Online</label>
+            <select th:name="competitionOnline" class="form-select" id="validationCompetitionOnline" required>
+                <option class="text-muted" selected disabled value="">Konkurs online</option>
+                <option th:value="true" th:text="Tak"></option>
+                <option th:value="false" th:text="Nie"></option>
+            </select>
+            <div class="valid-feedback">Ok!</div>
+            <div class="invalid-feedback">
+                Określ czy konkurs będzie się odbywał online.
+            </div>
+        </div><p>
+        <div>
+            <label for="validationCompetitionPrimaryDegree" class="form-label">Konkurs I stopnia</label>
+            <select th:name="competitionPrimaryDegree" class="form-select" id="validationCompetitionPrimaryDegree" required>
+                <option class="text-muted" selected disabled value="">Potwierdź stopień szkoły</option>
+                <option th:value="true" th:text="Tak"></option>
+                <option th:value="false" th:text="Nie"></option>
+            </select>
+            <div class="valid-feedback">Ok!</div>
+            <div class="invalid-feedback">
+                Określ, dla którego stopnia szkoły jest to konkurs.
+            </div>
+        </div><p>
+        <div>
+            <label for="validationCompetitionSecondaryDegree" class="form-label">Konkurs II stopnia</label>
+            <select th:name="competitionSecondaryDegree" class="form-select" id="validationCompetitionSecondaryDegree" required>
+                <option class="text-muted" selected disabled value="">Potwierdź stopień szkoły</option>
+                <option th:value="true" th:text="Tak"></option>
+                <option th:value="false" th:text="Nie"></option>
+            </select>
+            <div class="valid-feedback">Ok!</div>
+            <div class="invalid-feedback">
+                Określ, dla którego stopnia szkoły jest to konkurs.
+            </div>
+        </div><p>
+        <div>
+            <label for="validationCompetitionBeginning" class="form-label">Data i czas rozpoczęcia konkursu</label>
+            <input type="datetime-local" th:field="*{competitionBeginning}" class="form-control" id="validationCompetitionBeginning" required>
+            <div class="valid-feedback">Ok!</div>
+            <div class="invalid-feedback">Podaj datę i czas dotyczące rozpoczęcia konkursu.</div>
+        </div><p>
+        <div>
+            <label for="validationCompetitionEnd" class="form-label">Data i czas zakończenia konkursu</label>
+            <input type="datetime-local" th:field="*{competitionEnd}" class="form-control" id="validationCompetitionEnd" required>
+            <div class="valid-feedback">Ok!</div>
+            <div class="invalid-feedback">Podaj datę i czas dotyczące zakończenia konkursu.</div>
+        </div><p>
+        <div>
+            <label for="validationCompetitionResultAnnouncement" class="form-label">Data i czas ogłoszenia wyników na portalu</label>
+            <input type="datetime-local" th:field="*{competitionResultAnnouncement}" class="form-control" id="validationCompetitionResultAnnouncement" required>
+            <div class="valid-feedback">Ok!</div>
+            <div class="invalid-feedback">Podaj datę i czas opublikowania wyników na portalu.</div>
+        </div><p>
+        <div>
+            <label for="validationCompetitionApplicationDeadline" class="form-label">Ostateczny termin zgłoszeń</label>
+            <input type="datetime-local" th:field="*{competitionApplicationDeadline}" class="form-control" id="validationCompetitionApplicationDeadline" required>
+            <div class="valid-feedback">Ok!</div>
+            <div class="invalid-feedback">Podaj datę i czas ostatecznego terminu zgłoszeń do konkursu.</div>
+        </div><p>
+        <div>
+            <label for="validationCompetitionRequirementsDescription" class="form-label">Wymagania dotyczące konkursu</label>
+            <textarea th:field="*{competitionRequirementsDescription}" class="form-control"
+                      id="validationCompetitionRequirementsDescription" required></textarea>
+            <div class="valid-feedback">Ok!</div>
+            <div class="invalid-feedback">Opisz wszystkie wymagania dotyczące konkursu, podaj obowiązujące utwory dla poszczególnych klas itd.</div>
+        </div><p>
+        <div>
+            <label for="validationCompetitionOrganizerEmail" class="form-label">Email organizatora konkursu</label>
+            <input type="text" th:name="competitionOrganizerEmail" class="form-control" id="validationCompetitionOrganizerEmail" required>
+            <div class="valid-feedback">Ok!</div>
+            <div class="invalid-feedback">Podaj swój adres email jako organizatora konkursu.</div>
+        </div><p>
+        <h5>Czy konkurs odbywa się w szkole:</h5>
+        <div>
+            <label for="validationCompetitionLocation" class="form-label">Lokalizacja konkursu</label>
+            <select th:name="competitionSchoolLocation" class="form-select" id="validationCompetitionLocation" required>
+                <option selected disabled value="">Wybierz lokalizacje</option>
+                <option th:value="true" >Twoja Szkoła Muzyczna</option>
+                <option th:value="false">Inne miejsce</option>
+            </select>
+            <div class="valid-feedback">Ok!</div>
+            <div class="invalid-feedback">
+                Określ, czy konkurs odbędzie się w siedzibie szkoły, czy w innym miejscu.
+            </div>
+        </div><p>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+            <label class="form-check-label" for="invalidCheck">
+                Potwierdzenie podanych informacji
+            </label>
+            <div class="valid-feedback">Jeśli wszystko się zgadza, kliknij "Stwórz konkurs!"</div>
+            <div class="invalid-feedback">
+                Musisz potwierdzić poprawność informacji.
+            </div><p>
+        </div>
+            <div>
+                <button class="btn btn-success btn-lg" type="submit">Stwórz konkurs!</button>
+            </div>
+    </div>
+    </div>
+</form><br>
+<div class="d-grid gap-2 col-2 mx-auto">
+    <a class="btn btn-primary" th:href="@{/headmaster}" role="button">Portal Dyrektora</a>
+</div>
+</body>
+</html>

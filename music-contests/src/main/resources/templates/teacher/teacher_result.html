@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>TEACHER RESULT page</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+            crossorigin="anonymous"></script>
+</head>
+<body class="p-3 mb-2 bg-dark-subtle text-emphasis-dark">
+<form class="row g-3" action="#" th:action="@{/authentication/logout}" method="POST">
+    <div class="d-flex flex-row-reverse">
+        <button class="btn btn-info" type="submit">Wyloguj!</button>
+    </div>
+</form>
+<h1 class="text-center">Tutaj sprawdzisz wyniki zakończonych konkursów.</h1><br>
+<h2 class="text-center">Podaj kryteria, aby odnaleźć żądane konkursy.</h2><br>
+
+<div th:if="${#lists.isEmpty(cityDTOs)}" class="text-bg-info p-3">
+    <h4 class="text-center">Aktualnie brak rozstrzygniętych konkursów!</h4>
+</div><br>
+<div class="text-center" th:unless="${#lists.isEmpty(cityDTOs)}">
+    <form class="row g-2 was-validated" action="#" th:action="@{/teacher/result/competition/search}" method="GET">
+        <div class="row justify-content-evenly">
+            <div class="col-4">
+                <label for="validationCompetitionFrom" class="form-label">Data "od" zakresu wyszukiwania</label>
+                <input type="date" th:name="competitionFrom" class="form-control" id="validationCompetitionFrom" required>
+                <div class="valid-feedback">Ok!</div>
+                <div class="invalid-feedback">Podaj datę, OD której chcesz wyszukać konkursy.</div>
+            </div>
+            <div class="col-4">
+                <label for="validationCompetitionTo" class="form-label">Data "do" zakresu wyszukiwania</label>
+                <input type="date" th:name="competitionTo" class="form-control" id="validationCompetitionTo" required>
+                <div class="valid-feedback">Ok!</div>
+                <div class="invalid-feedback">Podaj datę, DO której chcesz wyszukać konkursy.</div>
+            </div>
+        </div>
+        <div class="col-md-4 offset-md-4">
+            <label for="validationCompetitionCity" class="form-label">Miasto szukanego konkursu</label>
+            <select th:name="competitionCity" class="form-select" id="validationCompetitionCity" required>
+                <option selected disabled value="">Miasto</option>
+                <span th:each="city : ${cityDTOs}">
+               <option th:value="${city}" th:text="${city}"></option>
+               </span>
+            </select>
+            <div class="valid-feedback">Ok!</div>
+            <div class="invalid-feedback">Podaj miasto, w którym odbył się konkurs.</div>
+        </div><br><p>
+        <div class="d-grid gap-2 col-4 mx-auto">
+            <button class="btn btn-info btn-lg" type="submit">Znajdź konkursy</button>
+        </div>
+    </form><br>
+</div>
+<div class="d-grid gap-2 col-2 mx-auto">
+    <a class="btn btn-primary" th:href="@{/teacher}" role="button">Portal Nauczyciela</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Create ACCOUNT page</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+            crossorigin="anonymous"></script>
+</head>
+<body class="p-3 mb-2 bg-dark-subtle text-emphasis-dark">
+<h1 class="text-center">Utwórz nowe konto!</h1><br>
+
+<form class="row g-1 was-validated" action="#" th:action="@{/authentication/account}" method="POST">
+    <h4>Podaj swoje podstawowe dane i zostaniesz przekierowany do dokończenia procesu na następnej stronie.</h4><p>
+    <div class="row justify-content-evenly">
+        <div class="col-md-4">
+            <label for="validationName" class="form-label">Imię</label>
+            <input type="text" th:name="name" class="form-control"
+                   id="validationName" placeholder="Tutaj wpisz imię" required>
+            <div class="valid-feedback">Ok!</div>
+            <div class="invalid-feedback">Podaj swoje imię.</div>
+        </div>
+        <div class="col-md-4">
+            <label for="validationSurname" class="form-label">Nazwisko</label>
+            <input type="text" th:name="surname" class="form-control" id="validationSurname"
+                   placeholder="Tutaj wpisz nazwisko" required>
+            <div class="valid-feedback">Ok!</div>
+            <div class="invalid-feedback">Podaj swoje nazwisko.</div>
+        </div>
+    </div><p>
+    <div class="row justify-content-evenly">
+        <div class="col-md-4">
+            <label for="validationEmail" class="form-label">Email</label>
+            <input type="text" th:name="email" class="form-control" id="validationEmail" placeholder="Tutaj wpisz email" required>
+            <div class="valid-feedback">Ok!</div>
+            <div class="invalid-feedback">Podaj swój adres email.</div>
+        </div>
+        <div class="col-md-4">
+            <label for="validationPeselNumber" class="form-label">Numer pesel</label>
+            <input type="text" th:name="pesel" class="form-control" id="validationPeselNumber"
+                   placeholder="Tutaj wpisz pesel" required>
+            <div class="valid-feedback">Ok!</div>
+            <div class="invalid-feedback">Podaj swój numer pesel (11 cyfr).</div>
+        </div>
+    </div><p>
+    <div class="row justify-content-evenly">
+        <div class="col-md-4">
+            <label for="validationRole" class="form-label">Rola</label>
+            <select th:name="role" class="form-select" id="validationRole" required>
+                <option class="text-muted" selected disabled value="">Tutaj wybierz swoją rolę</option>
+                <span th:each="role : ${roleList}">
+                <option th:if="${role == 'HEADMASTER'}" th:value="${role}" th:text="Dyrektor"></option>
+                <option th:if="${role == 'TEACHER'}" th:value="${role}" th:text="Nauczyciel"></option>
+                <option th:if="${role == 'STUDENT'}" th:value="${role}" th:text="Uczeń"></option>
+                </span>
+            </select>
+            <div class="valid-feedback">Ok!</div>
+            <div class="invalid-feedback">Wybierz swoją rolę w szkole.</div>
+        </div>
+        <div class="col-md-4">
+            <label for="validationMusicSchool" class="form-label">Szkoła Muzyczna</label>
+            <select th:name="musicSchoolId" class="form-select" id="validationMusicSchool" required>
+                <option class="text-muted" selected value="" disabled>Tutaj wybierz swoją szkołę</option>
+                <span th:each="musicSchool : ${musicSchoolDTOs}">
+                <option th:value="${musicSchool.musicSchoolId}"
+                        th:text="${musicSchool.musicSchoolName} + ' ' + ${musicSchool.addressCity}"></option>
+                </span>
+                <option class="text-bg-warning p-3" th:value="NONE">Na liście nie ma mojej szkoły</option>
+            </select>
+            <div class="valid-feedback">Ok!</div>
+            <div class="invalid-feedback">Wybierz swoją szkołę, jeśli znajduje się na liście.</div>
+        </div>
+    </div><p>
+    <div class="text-center col-md-4 offset-md-4">
+    <div>
+        <label for="validationPassword" class="form-label">Hasło do konta</label>
+        <input type="text" th:name="password" class="form-control" id="validationPassword"
+               placeholder="Tutaj wpisz swoje hasło" required>
+        <div class="valid-feedback">Upewnij się, że hasło zaczyna się od wielkiej litery i ma długość min. 8 znaków.</div>
+        <div class="invalid-feedback">Podaj hasło, dzięki któremu będziesz mógł się logować na portalu
+            (Musi posiadać minimum 8 znaków i zaczynać się od wielkiej litery!).</div>
+    </div><br>
+        <div>
+            <button class="btn btn-primary" type="submit">Przechodzę dalej!</button>
+        </div>
+    </div>
+</form>
+</body>
+</html>

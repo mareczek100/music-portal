@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>HEADMASTER COMPETITION CREATED page</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+            crossorigin="anonymous"></script>
+</head>
+<body class="p-3 mb-2 bg-dark-subtle text-emphasis-dark">
+<form class="row g-3" action="#" th:action="@{/authentication/logout}" method="POST">
+    <div class="d-flex flex-row-reverse">
+        <button class="btn btn-info" type="submit">Wyloguj!</button>
+    </div>
+</form>
+<h1 class="text-center">Stworzyłeś konkurs, teraz jest on dostępny dla wszystkich zainteresowanych.</h1><br>
+<div class="col-md-10 offset-md-1">
+    <table class="table table-info table-striped table-hover" th:object="${createdCompetitionDto}">
+        <thead class="table-dark">
+        <tr>
+            <th scope="col">Szczegóły konkursu</th>
+            <th scope="col">Wartość</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">Nazwa konkursu</th>
+            <td th:text="*{competitionName}"></td>
+        </tr>
+        <tr>
+            <th scope="row">Instrument konkursu</th>
+            <td th:text="*{competitionInstrument}"></td>
+        </tr>
+        <tr>
+            <th scope="row">Wymagania konkursu</th>
+            <td th:text="*{competitionRequirementsDescription}"></td>
+        </tr>
+        <tr>
+            <th scope="row">Konkursu online</th>
+            <td th:if="*{competitionOnline}">TAK</td>
+            <td th:unless="*{competitionOnline}">NIE</td>
+        </tr>
+        <tr>
+            <th scope="row">Konkurs I stopnia</th>
+            <td th:if="*{competitionPrimaryDegree}">TAK</td>
+            <td th:unless="*{competitionPrimaryDegree}">NIE</td>
+        </tr>
+        <tr>
+            <th scope="row">Konkurs II stopnia</th>
+            <td th:if="*{competitionSecondaryDegree}">TAK</td>
+            <td th:unless="*{competitionSecondaryDegree}">NIE</td>
+        </tr>
+        <tr>
+            <th scope="row">Data rozpoczęcia konkursu</th>
+            <td th:text="${#temporals.format(createdCompetitionDto.competitionBeginning, 'dd-MM-yyyy HH:mm')}"></td>
+        </tr>
+        <tr>
+            <th scope="row">Data zakończenia konkursu</th>
+            <td th:text="${#temporals.format(createdCompetitionDto.competitionEnd, 'dd-MM-yyyy HH:mm')}"></td>
+        </tr>
+        <tr>
+            <th scope="row">Data ogłoszenia wyników konkursu</th>
+            <td th:text="${#temporals.format(createdCompetitionDto.competitionResultAnnouncement, 'dd-MM-yyyy HH:mm')}"></td>
+        </tr>
+        <tr>
+            <th scope="row">Termin zgłoszeń do konkursu</th>
+            <td th:text="${#temporals.format(createdCompetitionDto.competitionApplicationDeadline, 'dd-MM-yyyy HH:mm')}"></td>
+        </tr>
+        <tr>
+            <th scope="row">Organizator konkursu</th>
+            <td th:text="'Dyrektor ' + *{competitionOrganizer.name} + ' ' + *{competitionOrganizer.surname}"></td>
+        </tr>
+        <tr>
+            <th scope="row">Lokalizacja konkursu</th>
+            <td th:text="*{competitionLocationName}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div><p>
+<h3 class="text-center">Jeśli chcesz możesz od razu zapisać do konkursu swojego ucznia!</h3><br>
+<h4 class="text-center">Przejdź do strony zapisów lub wróć do strony głównej.</h4><br>
+<div class="d-grid gap-2 col-2 mx-auto">
+    <a class="btn btn-primary" th:href="@{/headmaster/competition/student}" role="button">Zapisz ucznia</a>
+    <a class="btn btn-primary" th:href="@{/headmaster}" role="button">Portal Dyrektora</a>
+</div>
+</body>
+</html>

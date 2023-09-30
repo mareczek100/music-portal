@@ -1,0 +1,68 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version "${springBootVersion}"
+	id 'org.openapi.generator' version "${openapiGeneratorVersion}"
+	id 'io.spring.dependency-management' version "${springBootDependencyManagementVersion}"
+}
+
+group = 'mareczek100'
+version = '1.0.0'
+
+java {
+	sourceCompatibility = '17'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	//spring
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
+
+	//api
+	implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:$springdocOpenapiVersion"
+	implementation "javax.annotation:javax.annotation-api:$javaxAnnotationApiVersion"
+	implementation "org.openapitools:jackson-databind-nullable:$jacksonDatabindNullableVersion"
+	implementation "com.google.code.findbugs:jsr305:$findBugsJsr305Version"
+	implementation "io.swagger:swagger-annotations:$swaggerAnnotationVersion"
+
+	//annotation
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	//db
+	implementation 'org.flywaydb:flyway-core'
+	runtimeOnly 'org.postgresql:postgresql'
+
+	//test
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.boot:spring-boot-testcontainers'
+	testCompileOnly 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
+	testImplementation "org.testcontainers:postgresql:${testcontainersVersion}"
+	testImplementation "org.testcontainers:junit-jupiter:${testcontainersVersion}"
+	testImplementation "io.rest-assured:rest-assured:${restAssuredVersion}"
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+bootJar {
+	archiveFileName = "instrument_storage.${archiveExtension.get()}"
+}
+
+jar {
+	enabled = false
+}
+
+compileJava.options.encoding = 'UTF-8'

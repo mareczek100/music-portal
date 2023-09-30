@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>STUDENT COMPETITION SEARCH page</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+            crossorigin="anonymous"></script>
+</head>
+<body class="p-3 mb-2 bg-dark-subtle text-emphasis-dark">
+<form class="row g-3" action="#" th:action="@{/authentication/logout}" method="POST">
+    <div class="d-flex flex-row-reverse">
+        <button class="btn btn-info" type="submit">Wyloguj!</button>
+    </div>
+</form>
+<h1 class="text-center">Tutaj znajdziesz utworzone przez dyrektorów konkursy.</h1><br>
+<h2 class="text-center">Wybierz instrument i sprawdź, jakie są aktualnie dostępne.</h2>
+<div th:if="${#lists.isEmpty(cityDTOs)}" class="text-bg-info p-3">
+    <h4 class="text-center">Aktualnie brak konkursów!</h4>
+</div><br>
+<div th:unless="${#lists.isEmpty(cityDTOs)}">
+    <form class="row g-2 was-validated" action="#" th:object="${competitionDto}"
+          th:action="@{/student/competition/show}" method="GET">
+        <div class="col-md-4 offset-md-4 text-center">
+            <label for="validationCompetitionInstrument" class="form-label">Instrument</label>
+            <select th:name="competitionInstrument" class="form-select" id="validationCompetitionInstrument" required>
+                <option class="text-muted" selected disabled value="">Instrument konkursu</option>
+                <span th:each="instrument : ${instrumentDTOs}">
+                    <option th:value="${instrument.name}" th:text="${instrument.name}"></option>
+                    </span>
+            </select>
+            <div class="valid-feedback">Ok!</div>
+            <div class="invalid-feedback">Wybierz instrument konkursu.</div><br>
+            <button class="btn btn-info btn-lg" type="submit">Znajdź konkurs</button>
+        </div>
+    </form><br>
+<!--    <form class="row g-3" action="#" th:action="@{/student/competition/filters}" method="GET">-->
+<!--        <div class="col-md-6 offset-md-3 text-center">-->
+<!--            <h4>Lub skorzystaj z pełnej wyszukiwarki i podaj więcej kryteriów!</h4>-->
+<!--            <h5>Do wyboru masz filtry "online", "stopień", "miasto" i "instrument"</h5>-->
+<!--            <button class="btn btn-info" type="submit">Pełna wyszukiwarka!</button>-->
+<!--        </div>-->
+<!--    </form><br>-->
+    <div class="row justify-content-evenly text-center">
+        <h4>Możesz też skorzystać z pełnej wyszukiwarki albo po prostu wyświetlić wszystkie dostępne konkursy!</h4>
+        <div class="col-md-4">
+            <h5>Do wyboru masz filtry "online", "stopień", "miasto" i "instrument"</h5>
+            <a class="btn btn-info col-md-10" th:href="@{/student/competition/filters}" role="button">Pełna wyszukiwarka</a>
+        </div>
+        <div class="col-md-4">
+            <h5>Przejrzyj wszystkie konkursy bez podawania żadnych wytycznych</h5>
+            <a class="btn btn-info col-md-10" th:href="@{/student/competition/show/{currentPage}(currentPage=1)}"
+               role="button">Wszystkie konkursy</a>
+        </div>
+    </div><br>
+</div>
+    <div class="d-grid gap-2 col-2 mx-auto">
+        <a class="btn btn-primary" th:href="@{/student}" role="button">Portal Ucznia</a>
+    </div>
+</body>
+</html>

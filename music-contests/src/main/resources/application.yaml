@@ -1,0 +1,35 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /music-contests
+
+api:
+  instrument-storage:
+    url: http://localhost:8082/instrument-storage/
+
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/musical_contests
+    username: postgres
+    password: postgres
+    hikari:
+      connectionTimeout: 20000
+      minimumIdle: 10
+      maximumPoolSize: 20
+      idleTimeout: 300000
+  security:
+    enabled: false
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        show-sql: true
+        format-sql: false
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true

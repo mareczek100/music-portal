@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>ERROR main page</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+            crossorigin="anonymous"></script>
+</head>
+<body class="p-3 mb-2 bg-dark-subtle text-emphasis-dark">
+<h1 class="text-center">Error site!</h1><br>
+<div class="container text-center">
+    <h1>Sorry, some problem occurred! Details below:</h1><br>
+    <div class="row justify-content-evenly">
+        <div class="col-3">
+            <a th:href="@{/authentication/login}" class="btn btn-info btn-lg" role="button">LOGIN MAIN PAGE</a>
+        </div>
+        <div class="col-3">
+            <a th:href="@{/headmaster}" class="btn btn-info btn-lg" role="button">HEADMASTER PORTAL</a>
+        </div>
+        <div class="col-3">
+            <a th:href="@{/teacher}" class="btn btn-info btn-lg" role="button">TEACHER PORTAL</a>
+        </div>
+        <div class="col-3">
+            <a th:href="@{/student}" class="btn btn-info btn-lg" role="button">STUDENT PORTAL</a>
+        </div>
+    </div><br>
+    <b><h2 th:if="${errorMessage}" th:text="${errorMessage}"></h2></b>
+    <br>
+    <div class="col-md-6 offset-md-3">
+        <img th:src="@{/images/error.jpg}" alt="Error" width="auto" height="300px"/><br><br>
+    </div>
+</div>
+</body>
+</html>

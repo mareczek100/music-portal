@@ -1,0 +1,25 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /instrument-storage
+
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/instrument_storage
+    username: postgres
+    password: postgres
+    hikari:
+      connectionTimeout: 20000
+      minimumIdle: 10
+      maximumPoolSize: 20
+      idleTimeout: 300000
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        show-sql: true
+        format-sql: false
+        dialect: org.hibernate.dialect.PostgreSQLDialect
