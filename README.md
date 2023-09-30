@@ -1,5 +1,19 @@
-# MUSIC CONTESTS
-Music Contests - Konkursy Muzyczne. 
+# MUSIC CONTESTS PORTAL
+Music Contests Portal - Portal Konkursów Muzycznych. 
+
+JAK URUCHOMIĆ? 
+Do uruchomienia aplikacji musisz posiadać zainstalowanego Dockera. Z głównego katalogu 'music-portal' uruchom
+komendę z terminala "docker compose up" - uruchomi się wtedy kontener dockera złożony z obrazów dwóch aplikacji 
+(music-contests oraz instrument-storage) oraz obrazy baz danych dla każdej z nich (postgres).
+Strona startowa aplikacji po uruchomieniu kontenera: http://localhost:9090/music-contests/authentication/login
+
+Obie aplikacje, z których składa się program Portalu Konkursów Muzycznych wystawiają warstwę RESTful API, dokumentacja:
+http://localhost:9090/music-contests/swagger-ui/index.html
+http://localhost:9092/instrument-storage/swagger-ui/index.html
+
+Więcej informacji o kwestiach technicznych na końcu pliku.
+
+O APLIKACJI
 Aplikacja, która w jednym miejscu skupia wszystkie konkursy muzyczne ze wszystkich szkół muzycznych I i II stopnia 
 z całego kraju, pozwala je tworzyć, wyszukiwać, zgłaszać oraz wycofywać z nich uczniów, ogłaszać i przeglądać wyniki.
 Konkursy mogą być tworzone podziałem na wiele kategorii takich jak:
@@ -82,6 +96,7 @@ Każdy z użytkowników może natomiast:
 Do aplikacji są dodane przykładowe dane jako skrypty migracyjne flyway.
 Można korzystać ze wstępnie utworzonych kont, czy konkursów. 
 Najlepsza zabawa jest jednak wtedy, gdy stworzy się samemu wszystko od początku!
+Można też skorzystać z panelu administratora i przejrzeć dostęp do wszystkich funkcjonalności aplikacji.
 
 # Panel administratora
 login: admin@music-contests.pl
@@ -90,24 +105,18 @@ password: 00000000000
 Warstwa wizualna jest moją wariacją na temat, jak ta aplikacja mogłaby przykładowo wyglądać w praktyce.
 Pełna funkcjonalność dostępna jest w warstwie restowej.
 Wizualna aplikacja dostępna w przeglądarce jest zabezpieczona podstawowym security i każdy użytkownik ma dostęp
-tylko i wyłącznie do funkcjonalności w zależności od roli, jaką posiada - dyrektor, nauczyciel, uczeń.
-Wystawione rest api jest natomiast ogólnie dostępne, aby zobaczyć całą funkcjonalność i podział modułów aplikacji.
-
-# NIEZBĘDNE DO DZIAŁANIA
--Aplikacja konsumuje inne api - Instrument Storage - bazę instrumentów, również dostępne na moim git-hubie:
-
-https://github.com/mareczek100/instrument-storage
-
-Najlepiej najpierw uruchomić Instrument Storage (bo tworzy sieć w dockerze), a potem Music Contests,
-bo się do tej sieci przy tworzeniu kontenerów podpina.
+tylko i wyłącznie do danych funkcjonalności w zależności od roli, jaką posiada - dyrektor, nauczyciel, uczeń (lub admin).
+Wystawione Rest API jest natomiast ogólnie dostępne, aby zobaczyć całą funkcjonalność i podział modułów aplikacji.
 
 # Kwestie techniczne:
 - Warstwa wizualna/html: thymeleaf + bootstrap
 - Java 17
 - Oprócz warstwy kontrolerów html aplikacja wystawia też RESTful api
-- Docker: aplikacja jest oparta o docker compose razem z PostgreSQL,
-uruchomiona z pliku .jar działa na porcie: 8080 - przez kontener port: 9090, baza danych: 5432
-druga aplikacja, którą konsumuje - Instrument Storage port: 8082, jej kontener port: 9092, baza danych: 5432
+- Docker: aplikacja jest oparta o docker compose (dwie aplikacje z bazami danych w jednym kontenerze).
+
+Każda z dwóch aplikacji składających się na program Portalu Konkursów Muzycznych może być uruchomiana osobno w IntelliJ lub innym IDE.
+Music Contests port: 8080, baza danych: 5432
+Instrument Storage port: 8082 baza danych: 5432
 LINKI STARTOWE
 *MUSIC CONTESTS
 - lokalnie:
@@ -116,6 +125,8 @@ LINKI STARTOWE
   http://localhost:8080/music-contests/swagger-ui/index.html
 
   http://localhost:8080/music-contests/admin - portal administratora (po zalogowaniu)
+
+  DB PostreSQL: 5432
 
 - docker:
   http://localhost:9090/music-contests/authentication/login
@@ -129,6 +140,8 @@ DB port: 8000
 *INSTRUMENT STORAGE
 - lokalnie:
   http://localhost:8082/instrument-storage/swagger-ui/index.html
+
+DB PostreSQL: 5432
 
 - docker:
   http://localhost:9092/instrument-storage/swagger-ui/index.html
