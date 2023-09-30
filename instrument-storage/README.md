@@ -1,2 +1,2 @@
 # instrument-storage
-Instrument base expose to use by other apps for their purposes.
+Instrument base exposed to use by other apps for their purposes.

@@ -34,7 +34,6 @@ dependencies {
 	implementation "org.thymeleaf.extras:thymeleaf-extras-java8time:$thymeleafVersion"
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
-	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
 
 	//db
 	implementation 'org.flywaydb:flyway-core'
