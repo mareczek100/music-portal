@@ -4,7 +4,7 @@ Music Contests Portal - Portal Konkursów Muzycznych.
 # JAK URUCHOMIĆ?
 Do uruchomienia aplikacji musisz posiadać zainstalowanego Dockera. Z głównego katalogu 'music-portal' uruchom
 komendę z terminala "docker compose up" - uruchomi się wtedy kontener dockera złożony z obrazów dwóch aplikacji 
-(music-contests oraz instrument-storage) oraz obrazy baz danych dla każdej z nich (postgres).
+(music-contests oraz instrument-storage) wraz z obrazami ich baz danych (postgres).
 Strona startowa aplikacji po uruchomieniu kontenera:  
 http://localhost:9090/music-contests/authentication/login
 
@@ -100,7 +100,7 @@ Najlepsza zabawa jest jednak wtedy, gdy stworzy się samemu wszystko od początk
 Można też skorzystać z panelu administratora i przejrzeć dostęp do wszystkich funkcjonalności aplikacji.
 
 # Panel administratora
-login: admin@music-contests.pl
+login: admin@music-contests.pl  
 password: 00000000000
 
 # Kwestie techniczne
@@ -109,18 +109,18 @@ Pełna funkcjonalność programu, którą można wykorzystać dostępna jest w w
 Warstwa wizualna dostępna w przeglądarce jest zabezpieczona podstawowym security i każdy użytkownik ma dostęp
 tylko i wyłącznie do danych funkcjonalności w zależności od roli, jaką posiada - dyrektor, nauczyciel, uczeń (lub admin).
 Wystawione Rest API jest natomiast ogólnie dostępne, aby móc zobaczyć całą funkcjonalność i podział modułów aplikacji.  
-Najważniejze info:
+Najważniejsze informacje:
 - Warstwa wizualna/html: thymeleaf + bootstrap
 - Java 17
 - Oprócz warstwy kontrolerów html aplikacja wystawia też RESTful api
 - Docker: aplikacja jest oparta o docker compose (dwie aplikacje z bazami danych PostreSQL w jednym kontenerze).
 
-Każda z dwóch aplikacji składających się na program Portalu Konkursów Muzycznych może być uruchomiana osobno w IntelliJ lub innym IDE.
+Każda z dwóch aplikacji składających się na program Portalu Konkursów Muzycznych może być uruchomiana osobno w IntelliJ lub innym IDE.  
 Aplikacje składające się na PORTAL KONKURSÓW MUZYCZNYCH:
 - Music Contests -aplikacja główna- główny moduł i serce Portalu Konkursów Muzycznych. Potrzebuje do działania bazy instrumentów, którą pobiera z Instrument Storage. 
 - Instrument Storage -aplikacja wspomagająca- zawiera bazę oraz kategorie instrumentów. Wystawia REST API, z której mogą korzystać inne aplikacje.
 
-LINKI STARTOWE w zależności czy uruchamiasz przez IDE czy kontener przez docker compose
+LINKI STARTOWE w zależności czy uruchamiasz przez IDE czy przez kontener docker compose  
 *MUSIC CONTESTS - aplikacja główna
 - lokalnie:
   http://localhost:8080/music-contests/authentication/login - strona logowania do aplikacji
@@ -155,6 +155,6 @@ NIE posiada warstwy html.
 # Uwagi:
 Sama aplikacja jest pisana w języku angielskim, kod oraz wszystkie komunikaty błędów, nazwy encji, pól itd., 
 natomiast sam interfejs "frontowy" jest w języku polskim, który ma symulować dedykowaną wersje dla
-polskiego szkolnictwa, bo z myślą o nim była tworzona ta apka:))
+polskiego szkolnictwa, bo z myślą o nim była tworzona ta aplikacja.
 
 kontakt do mnie: mareczek100@wp.pl
