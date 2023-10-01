@@ -1,22 +1,23 @@
 # MUSIC CONTESTS PORTAL
 Music Contests Portal - Portal Konkursów Muzycznych. 
 
-JAK URUCHOMIĆ? 
+# JAK URUCHOMIĆ?
 Do uruchomienia aplikacji musisz posiadać zainstalowanego Dockera. Z głównego katalogu 'music-portal' uruchom
 komendę z terminala "docker compose up" - uruchomi się wtedy kontener dockera złożony z obrazów dwóch aplikacji 
 (music-contests oraz instrument-storage) oraz obrazy baz danych dla każdej z nich (postgres).
-Strona startowa aplikacji po uruchomieniu kontenera: http://localhost:9090/music-contests/authentication/login
+Strona startowa aplikacji po uruchomieniu kontenera:  
+http://localhost:9090/music-contests/authentication/login
 
-Obie aplikacje, z których składa się program Portalu Konkursów Muzycznych wystawiają warstwę RESTful API, dokumentacja:
-http://localhost:9090/music-contests/swagger-ui/index.html
-http://localhost:9092/instrument-storage/swagger-ui/index.html
+Obie aplikacje, z których składa się program Portalu Konkursów Muzycznych wystawiają warstwę RESTful API, dokumentacja:  
+http://localhost:9090/music-contests/swagger-ui/index.html  
+http://localhost:9092/instrument-storage/swagger-ui/index.html  
 
 Więcej informacji o kwestiach technicznych na końcu pliku.
 
-O APLIKACJI
+# O APLIKACJI
 Aplikacja, która w jednym miejscu skupia wszystkie konkursy muzyczne ze wszystkich szkół muzycznych I i II stopnia 
-z całego kraju, pozwala je tworzyć, wyszukiwać, zgłaszać oraz wycofywać z nich uczniów, ogłaszać i przeglądać wyniki.
-Konkursy mogą być tworzone podziałem na wiele kategorii takich jak:
+z całego kraju. Pozwala je tworzyć, wyszukiwać, zgłaszać oraz wycofywać z nich uczniów, ogłaszać i przeglądać wyniki.  
+Konkursy mogą być tworzone z podziałem na wiele kategorii takich jak:
 - online (czy konkurs jest stacjonarny, czy online)
 - stopień konkursu (czy konkurs jest dla pierwszego, czy drugiego stopnia szkoły muzycznej - lub dla obu naraz)
 - instrument
@@ -27,7 +28,7 @@ Aplikacja daje użytkownikom możliwość sprawdzenia jakie konkursy odbędą si
 oraz zapisania się do wzięcia w nich udziału. Do wyboru użytkownik ma trzy wyszukiwarki konkursów:
 - wyszukiwarka ogólna - wyświetla wszystkie aktualnie dostępne konkursy
 - wyszukiwarka po instrumencie
-- wyszukiwarka po kilku filtrach naraz
+- wyszukiwarka po kilku filtrach naraz (online, stopień, instrument, miasto konkursu)
 
 Aplikacja pełni również funkcje informacyjne, wyszukane konkursy zawierają takie informacje o konkursach jak:
 - data rozpoczęcia i zakończenia konkursu 
@@ -35,11 +36,11 @@ Aplikacja pełni również funkcje informacyjne, wyszukane konkursy zawierają t
 - termin, w którym organizator konkursu zobowiązuje się ogłosić wyniki na portalu konkursów muzycznych
 - lokalizacja konkursu
 - organizator konkursu
-- wymagania konkursu - cały opis wymaganych do zagrania utworów dla danych kategorii wiekowych itd. 
+- wymagania konkursu - cały opis wymaganych do zagrania utworów dla danych kategorii wiekowych itd.  
 
 Aplikacja daje również użytkownikom możliwość sprawdzenia wyników konkursów, które już się zakończyły.
 
-Aplikacja składa się z trzech głównych modułów oraz czwartego - administratora, 
+Program składa się z trzech głównych modułów oraz czwartego specjalnego - administratora, 
 który jako jedyny ma dostęp do wszystkich innych.
 Wszystkie moduły różnią się funkcjonalnością oraz poziomem uprawnień użytkownika:
 - Moduł administratora
@@ -89,9 +90,9 @@ Każdy z użytkowników może natomiast:
 - usunąć swoje konto
 - wyszukać wszystkie instrumenty z podziałem na kategorie
 - wyszukać wszystkie miasta, w których aktualnie odbywają się konkursy
-- zalogować się na swoje konto - każdy moduł ma osobny swój mini-portal tylko ze swoimi funkcjonalnościami
-  (loginem jest email, a hasłem pesel użytkownika)
-- hasła użytkowników są szyfrowane (Bcrypt) i zakodowane trzymane w bazie danych 
+- zalogować się na swoje konto - każdy moduł ma swój osobny mini-portal tylko ze swoimi funkcjonalnościami
+  (loginem jest email podany przy rejestracji, plus hasło, które definiujemy podczas zakładania konta)
+- hasła i pesele użytkowników są szyfrowane (Bcrypt) i przetrzymywane w bazie danych w postaci zakodowanej
 
 Do aplikacji są dodane przykładowe dane jako skrypty migracyjne flyway.
 Można korzystać ze wstępnie utworzonych kont, czy konkursów. 
@@ -102,51 +103,54 @@ Można też skorzystać z panelu administratora i przejrzeć dostęp do wszystki
 login: admin@music-contests.pl
 password: 00000000000
 
-Warstwa wizualna jest moją wariacją na temat, jak ta aplikacja mogłaby przykładowo wyglądać w praktyce.
-Pełna funkcjonalność dostępna jest w warstwie restowej.
-Wizualna aplikacja dostępna w przeglądarce jest zabezpieczona podstawowym security i każdy użytkownik ma dostęp
+# Kwestie techniczne
+Warstwa wizualna jest moją prostą wariacją na temat, jak ta aplikacja webowa mogłaby przykładowo wyglądać w praktyce.
+Pełna funkcjonalność programu, którą można wykorzystać dostępna jest w warstwie restowej.
+Warstwa wizualna dostępna w przeglądarce jest zabezpieczona podstawowym security i każdy użytkownik ma dostęp
 tylko i wyłącznie do danych funkcjonalności w zależności od roli, jaką posiada - dyrektor, nauczyciel, uczeń (lub admin).
-Wystawione Rest API jest natomiast ogólnie dostępne, aby zobaczyć całą funkcjonalność i podział modułów aplikacji.
-
-# Kwestie techniczne:
+Wystawione Rest API jest natomiast ogólnie dostępne, aby móc zobaczyć całą funkcjonalność i podział modułów aplikacji.  
+Najważniejze info:
 - Warstwa wizualna/html: thymeleaf + bootstrap
 - Java 17
 - Oprócz warstwy kontrolerów html aplikacja wystawia też RESTful api
-- Docker: aplikacja jest oparta o docker compose (dwie aplikacje z bazami danych w jednym kontenerze).
+- Docker: aplikacja jest oparta o docker compose (dwie aplikacje z bazami danych PostreSQL w jednym kontenerze).
 
 Każda z dwóch aplikacji składających się na program Portalu Konkursów Muzycznych może być uruchomiana osobno w IntelliJ lub innym IDE.
-Music Contests port: 8080, baza danych: 5432
-Instrument Storage port: 8082 baza danych: 5432
-LINKI STARTOWE
-*MUSIC CONTESTS
-- lokalnie:
-  http://localhost:8080/music-contests/authentication/login
+Aplikacje składające się na PORTAL KONKURSÓW MUZYCZNYCH:
+- Music Contests -aplikacja główna- główny moduł i serce Portalu Konkursów Muzycznych. Potrzebuje do działania bazy instrumentów, którą pobiera z Instrument Storage. 
+- Instrument Storage -aplikacja wspomagająca- zawiera bazę oraz kategorie instrumentów. Wystawia REST API, z której mogą korzystać inne aplikacje.
 
-  http://localhost:8080/music-contests/swagger-ui/index.html
+LINKI STARTOWE w zależności czy uruchamiasz przez IDE czy kontener przez docker compose
+*MUSIC CONTESTS - aplikacja główna
+- lokalnie:
+  http://localhost:8080/music-contests/authentication/login - strona logowania do aplikacji
+
+  http://localhost:8080/music-contests/swagger-ui/index.html - dokumentacja REST
 
   http://localhost:8080/music-contests/admin - portal administratora (po zalogowaniu)
 
   DB PostreSQL: 5432
 
 - docker:
-  http://localhost:9090/music-contests/authentication/login
+  http://localhost:9090/music-contests/authentication/login - strona logowania do aplikacji
 
-  http://localhost:9090/music-contests/swagger-ui/index.html
+  http://localhost:9090/music-contests/swagger-ui/index.html - dokumentacja REST
 
   http://localhost:9090/music-contests/admin - portal administratora (po zalogowaniu)
 
-DB port: 8000
+  DB port: 8000
 
-*INSTRUMENT STORAGE
+*INSTRUMENT STORAGE - aplikacja wymagana do poprawnego działania MUSIC CONTESTS, zapewniająca dostęp do bazy instrumentów.
+NIE posiada warstwy html.
 - lokalnie:
-  http://localhost:8082/instrument-storage/swagger-ui/index.html
+  http://localhost:8082/instrument-storage/swagger-ui/index.html - dokumentacja REST
 
-DB PostreSQL: 5432
+  DB PostreSQL: 5432
 
 - docker:
-  http://localhost:9092/instrument-storage/swagger-ui/index.html
+  http://localhost:9092/instrument-storage/swagger-ui/index.html - dokumentacja REST  
 
-DB port: 8002
+  DB port: 8002
 
 # Uwagi:
 Sama aplikacja jest pisana w języku angielskim, kod oraz wszystkie komunikaty błędów, nazwy encji, pól itd., 
