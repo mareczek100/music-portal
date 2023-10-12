@@ -1,5 +1,5 @@
-# MUSIC CONTESTS PORTAL
-Music Contests Portal - Portal Konkursów Muzycznych. 
+# MUSIC CONTEST PORTAL
+Music Contest Portal - Portal Konkursów Muzycznych. 
 
 # JAK URUCHOMIĆ?
 Do uruchomienia aplikacji musisz posiadać zainstalowanego Dockera. Z głównego katalogu 'music-portal' uruchom
